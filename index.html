@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Conversion</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1>Image to RGB Conversion</h1>
+        <p class="subtitle">Upload gambar untuk melihat nilai RGB dari setiap pixel</p>
+        
+        <div class="upload-section">
+          <input type="file" id="imageInput" accept="image/*" />
+          <label for="imageInput" class="upload-button">
+            Upload Gambar
+          </label>
+        </div>
+
+        <div id="imagePreview" class="image-preview hidden">
+          <h2>Preview Gambar</h2>
+          <canvas id="imageCanvas"></canvas>
+          <div class="image-info">
+            <span id="imageSize"></span>
+          </div>
+        </div>
+
+        <div id="pixelData" class="pixel-data hidden">
+          <h2>Data Pixel</h2>
+          <div class="controls">
+            <label>
+              <input type="checkbox" id="showAllPixels" />
+              Tampilkan semua pixel (hati-hati dengan gambar besar!)
+            </label>
+          </div>
+          <div id="pixelList" class="pixel-list"></div>
+        </div>
+
+        <div id="hoverInfo" class="hover-info hidden">
+          <div class="hover-content">
+            <strong>Koordinat:</strong> <span id="hoverCoord"></span><br>
+            <strong>RGB:</strong> <span id="hoverRGB"></span><br>
+            <div id="hoverColor" class="color-box"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
