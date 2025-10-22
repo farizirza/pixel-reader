@@ -81,7 +81,9 @@ class HistogramAnalyzer {
 
     for (let i = 0; i < this.data.length; i += 4) {
       const gray = Math.round(
-        0.299 * this.data[i] + 0.587 * this.data[i + 1] + 0.114 * this.data[i + 2]
+        0.299 * this.data[i] +
+          0.587 * this.data[i + 1] +
+          0.114 * this.data[i + 2]
       );
       hist[gray]++;
     }
@@ -194,7 +196,9 @@ class HistogramAnalyzer {
     const newData = new Uint8ClampedArray(this.data.length);
     for (let i = 0; i < this.data.length; i += 4) {
       const gray = Math.round(
-        0.299 * this.data[i] + 0.587 * this.data[i + 1] + 0.114 * this.data[i + 2]
+        0.299 * this.data[i] +
+          0.587 * this.data[i + 1] +
+          0.114 * this.data[i + 2]
       );
       const newGray = lookupTable[gray];
 
@@ -1585,7 +1589,11 @@ class PixelReader {
 
       if (dataDiv.classList.contains("hidden")) {
         // Show data
-        this.displayHistogramDataTable(this.rgbHistData, "histogramRGBData", "RGB");
+        this.displayHistogramDataTable(
+          this.rgbHistData,
+          "histogramRGBData",
+          "RGB"
+        );
         dataDiv.classList.remove("hidden");
         button.textContent = "🔼 Sembunyikan Data Histogram RGB";
       } else {
@@ -1616,7 +1624,7 @@ class PixelReader {
 
   displayHistogramDataTable(histData, targetId, type) {
     const targetDiv = document.getElementById(targetId);
-    let html = '<table><thead><tr><th>Intensity</th>';
+    let html = "<table><thead><tr><th>Intensity</th>";
 
     if (type === "RGB") {
       html += "<th>Red</th><th>Green</th><th>Blue</th>";
@@ -1654,10 +1662,14 @@ class PixelReader {
     const result = analyzer.detectTwoPeaks(this.grayHistData);
 
     // Display hasil deteksi
-    document.getElementById("peak1Value").textContent = result.peak1.value.toFixed(0);
-    document.getElementById("peak1Intensity").textContent = result.peak1.intensity;
-    document.getElementById("peak2Value").textContent = result.peak2.value.toFixed(0);
-    document.getElementById("peak2Intensity").textContent = result.peak2.intensity;
+    document.getElementById("peak1Value").textContent =
+      result.peak1.value.toFixed(0);
+    document.getElementById("peak1Intensity").textContent =
+      result.peak1.intensity;
+    document.getElementById("peak2Value").textContent =
+      result.peak2.value.toFixed(0);
+    document.getElementById("peak2Intensity").textContent =
+      result.peak2.intensity;
     document.getElementById("optimalThreshold").textContent = result.threshold;
 
     document.getElementById("thresholdResult").style.display = "block";
@@ -1686,7 +1698,7 @@ class PixelReader {
     beforeCanvas.width = imageData.width;
     beforeCanvas.height = imageData.height;
     const beforeCtx = beforeCanvas.getContext("2d");
-    
+
     // Convert to grayscale first
     const grayImageData = this.processor.toGrayscale();
     beforeCtx.putImageData(grayImageData, 0, 0);
@@ -1730,7 +1742,9 @@ class PixelReader {
     );
 
     console.log("✅ Histogram Equalization berhasil diterapkan!");
-    console.log(`Before - Mean: ${beforeStats.mean}, Std: ${beforeStats.stdDev}`);
+    console.log(
+      `Before - Mean: ${beforeStats.mean}, Std: ${beforeStats.stdDev}`
+    );
     console.log(`After - Mean: ${afterStats.mean}, Std: ${afterStats.stdDev}`);
   }
 

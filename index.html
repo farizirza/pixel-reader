@@ -69,7 +69,7 @@
             <!-- Histogram Tab -->
             <div id="histogram" class="tab-pane">
               <h2>📈 Histogram & Analisis</h2>
-              
+
               <!-- RGB Histogram -->
               <div class="histogram-section">
                 <h3>Histogram RGB</h3>
@@ -97,7 +97,10 @@
                   <button class="action-button secondary" id="toggleRGBData">
                     📊 Tampilkan Data Histogram RGB
                   </button>
-                  <div id="histogramRGBData" class="histogram-data hidden"></div>
+                  <div
+                    id="histogramRGBData"
+                    class="histogram-data hidden"
+                  ></div>
                 </div>
               </div>
 
@@ -118,7 +121,10 @@
                   <button class="action-button secondary" id="toggleGrayData">
                     📊 Tampilkan Data Histogram Grayscale
                   </button>
-                  <div id="histogramGrayData" class="histogram-data hidden"></div>
+                  <div
+                    id="histogramGrayData"
+                    class="histogram-data hidden"
+                  ></div>
                 </div>
               </div>
 
@@ -131,16 +137,32 @@
                       Deteksi Threshold dari 2 Puncak Histogram
                     </button>
                     <p class="info-text" id="thresholdInfo">
-                      Sistem akan mencari 2 puncak tertinggi pada histogram grayscale
-                      dan menghitung threshold optimal di antara keduanya.
+                      Sistem akan mencari 2 puncak tertinggi pada histogram
+                      grayscale dan menghitung threshold optimal di antara
+                      keduanya.
                     </p>
                   </div>
-                  <div class="control-group" id="thresholdResult" style="display: none;">
+                  <div
+                    class="control-group"
+                    id="thresholdResult"
+                    style="display: none"
+                  >
                     <div class="threshold-result-box">
                       <h4>Hasil Deteksi:</h4>
-                      <p>Peak 1: <span id="peak1Value">-</span> (intensity: <span id="peak1Intensity">-</span>)</p>
-                      <p>Peak 2: <span id="peak2Value">-</span> (intensity: <span id="peak2Intensity">-</span>)</p>
-                      <p><strong>Threshold Optimal: <span id="optimalThreshold">-</span></strong></p>
+                      <p>
+                        Peak 1: <span id="peak1Value">-</span> (intensity:
+                        <span id="peak1Intensity">-</span>)
+                      </p>
+                      <p>
+                        Peak 2: <span id="peak2Value">-</span> (intensity:
+                        <span id="peak2Intensity">-</span>)
+                      </p>
+                      <p>
+                        <strong
+                          >Threshold Optimal:
+                          <span id="optimalThreshold">-</span></strong
+                        >
+                      </p>
                     </div>
                   </div>
                 </div>
