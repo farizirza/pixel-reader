@@ -181,13 +181,9 @@ export class HistogramFeature {
 
     const result = analyzer.detectTwoPeaks(this.grayHistData);
 
-    // Display hasil deteksi
-    document.getElementById("peak1Value").textContent =
-      result.peak1.value.toFixed(0);
+    // Display hasil deteksi (intensity only, no frequency)
     document.getElementById("peak1Intensity").textContent =
       result.peak1.intensity;
-    document.getElementById("peak2Value").textContent =
-      result.peak2.value.toFixed(0);
     document.getElementById("peak2Intensity").textContent =
       result.peak2.intensity;
     document.getElementById("optimalThreshold").textContent = result.threshold;
@@ -200,7 +196,7 @@ export class HistogramFeature {
     this.processor.drawToCanvas(binaryData, canvas);
 
     console.log(
-      `✅ Threshold otomatis terdeteksi: ${result.threshold} (Peak1: ${result.peak1.intensity}, Peak2: ${result.peak2.intensity})`
+      `✅ Threshold otomatis terdeteksi: ${result.threshold} (Peak1 Intensity: ${result.peak1.intensity}, Peak2 Intensity: ${result.peak2.intensity})`
     );
   }
 

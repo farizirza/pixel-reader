@@ -805,18 +805,21 @@ input[type="file"] {
 
 .histogram-data {
   margin-top: 16px;
-  padding: 16px;
+  padding: 0;
   background: #f8fafc;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   max-height: 400px;
   overflow-y: auto;
+  overflow-x: auto;
   text-align: left;
+  position: relative;
 }
 
 .histogram-data table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.9em;
 }
 
@@ -825,18 +828,49 @@ input[type="file"] {
   padding: 8px 12px;
   border: 1px solid #e2e8f0;
   text-align: center;
+  background: white;
 }
 
 .histogram-data th {
-  background: #e2e8f0;
-  color: #475569;
+  background: #3b82f6;
+  color: white;
   font-weight: 600;
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #2563eb;
 }
 
-.histogram-data tr:hover {
+.histogram-data tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.histogram-data tbody tr:hover td {
+  background: #f1f5f9;
+}
+
+/* Custom scrollbar for histogram data */
+.histogram-data::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.histogram-data::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.histogram-data::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+.histogram-data::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.histogram-data::-webkit-scrollbar-corner {
   background: #f1f5f9;
 }
 
