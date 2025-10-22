@@ -1,108 +1,186 @@
-# 🎨 Pixel Reader
+# Pixel Reader - Image Processing Application
 
-Aplikasi web berbasis Vite untuk membaca dan menganalisis nilai RGB dari setiap pixel pada gambar yang diunggah.
+A web-based image processing application built with Vite for reading and analyzing RGB pixel values with multiple image processing operations.
 
-## ✨ Fitur
+## Features
 
-- 📤 **Upload Gambar**: Unggah gambar dalam format apapun (JPG, PNG, GIF, dll)
-- 🔍 **Analisis Pixel**: Membaca setiap pixel dari gambar dan menampilkan koordinat (x, y) beserta nilai RGB-nya
-- 🖱️ **Hover Info**: Arahkan kursor ke gambar untuk melihat nilai RGB pixel secara real-time
-- 📊 **Tampilan Data**: 
-  - Mode sample (100 pixel pertama)
-  - Mode lengkap (semua pixel)
-- 📥 **Export CSV**: Ekspor seluruh data pixel ke format CSV
-- 🎨 **Preview Warna**: Lihat visualisasi warna dari setiap pixel
+### Core Features
 
-## 🚀 Cara Menggunakan
+- **RGB Pixel Reader**: Upload and analyze RGB values from any image
+- **Real-time Hover Info**: View pixel RGB values by hovering over the image
+- **Coordinate Search**: Search and locate specific pixel coordinates in all matrices
+- **Matrix Visualization**: Display 100x100 pixel matrix with RGB color representation
 
-### Instalasi
+### Image Processing Operations
+
+1. **Grayscale Conversion**
+
+   - Automatic conversion using luminance formula: 0.299R + 0.587G + 0.114B
+   - Real-time preview
+
+2. **Binary Threshold**
+
+   - Adjustable threshold slider (0-255)
+   - Real-time conversion as you adjust the slider
+
+3. **Brightness Adjustment**
+
+   - Range: -255 to +255
+   - Real-time brightness control with slider
+
+4. **Arithmetic Operations**
+
+   - Operations: Addition, Subtraction, Multiplication
+   - Modes: Constant value or second image
+   - Support for different image resolutions (auto-resize)
+
+5. **Boolean Operations**
+
+   - Operations: AND, OR, XOR
+   - Dual image preview
+   - Support for different image resolutions (auto-resize)
+
+6. **Geometric Transformations**
+   - Rotation: 90°, 180°, 270°
+   - Flip: Horizontal and Vertical
+
+## Installation
 
 ```bash
-# Jika belum install dependencies (sudah dilakukan otomatis)
 npm install
 ```
 
-### Menjalankan Aplikasi
+## Usage
+
+### Development Mode
 
 ```bash
 npm run dev
 ```
 
-Aplikasi akan berjalan di `http://localhost:5173/`
+Application will run at `http://localhost:5173/`
 
-### Build untuk Production
+### Production Build
 
 ```bash
 npm run build
 ```
 
-## 📖 Cara Kerja
+## How to Use
 
-1. **Upload Gambar**: Klik tombol "Pilih Gambar" dan pilih gambar dari komputer Anda
-2. **Lihat Preview**: Gambar akan ditampilkan di canvas
-3. **Analisis Otomatis**: Aplikasi secara otomatis membaca setiap pixel
-4. **Lihat Data**: 
-   - Secara default, 100 pixel pertama ditampilkan
-   - Centang checkbox "Tampilkan semua pixel" untuk melihat semua data
-5. **Hover untuk Detail**: Arahkan kursor ke gambar untuk melihat info pixel secara real-time
-6. **Export Data**: Klik tombol "Export ke CSV" untuk mengunduh data dalam format CSV
+### Basic Workflow
 
-## 📊 Format Output
+1. Upload an image using the file input
+2. Navigate between tabs to access different processing features
+3. Use the coordinate search to find specific pixels
+4. Apply operations and view results in real-time
 
-Setiap pixel ditampilkan dengan format:
-```
-x(koordinat_x), y(koordinat_y) → RGB(nilai_r, nilai_g, nilai_b)
-```
+### Coordinate Search
 
-Contoh:
-```
-x(0), y(0) → RGB(0, 255, 1)
-x(1), y(0) → RGB(255, 128, 64)
-```
+- Enter X and Y coordinates in the search boxes
+- Click "Cari" to locate the pixel
+- Found pixels will be highlighted and scrolled into view
+- Search results show RGB values
 
-## 🗂️ Struktur Project
+### Two-Image Operations (Arithmetic & Boolean)
+
+- Upload a second image (any resolution supported)
+- If resolutions differ, the second image will be auto-resized
+- Status indicators show original size and target resize dimensions
+- Preview canvases show both images before processing
+
+## Project Structure
 
 ```
 pixel-reader/
-├── index.html          # HTML utama
+├── index.html                    # Main HTML with tab navigation
 ├── src/
-│   ├── main.js        # Logika aplikasi (PixelReader class)
-│   └── style.css      # Styling
+│   ├── main.js                   # Core application logic
+│   │   ├── TabManager           # Tab navigation handler
+│   │   ├── ImageProcessor       # Image processing algorithms
+│   │   └── PixelReader          # Main app class
+│   └── style.css                # Styling and layout
+├── .github/
+│   └── copilot-instructions.md  # AI coding guidelines
 ├── package.json
 └── README.md
 ```
 
-## 🔧 Teknologi yang Digunakan
+## Technical Details
 
-- **Vite**: Build tool dan development server
-- **Vanilla JavaScript**: Tanpa framework
-- **HTML5 Canvas**: Untuk membaca pixel dari gambar
-- **CSS3**: Untuk styling modern
+### Canvas API
 
-## 💡 Tips
+- Uses HTML5 Canvas with `willReadFrequently: true` for optimal performance
+- Multiple canvas strategy for independent operations
+- ImageData manipulation for pixel-level processing
 
-- Untuk gambar berukuran besar, gunakan mode sample terlebih dahulu
-- Gunakan fitur hover untuk eksplorasi cepat nilai RGB
-- Data CSV dapat dibuka di Excel atau Google Sheets untuk analisis lebih lanjut
+### Image Resize
 
-## 🎯 Use Cases
+- Automatic resize for different resolutions
+- Browser-based interpolation (bicubic/bilinear)
+- Original images preserved, resize only for processing
 
-- Analisis warna pada gambar
-- Pembelajaran pengolahan citra
-- Ekstraksi palet warna
-- Penelitian dan eksperimen dengan pixel data
-- Proyek komputer vision dan machine learning
+### Architecture
 
-## 📝 Catatan
+- Tab-based SPA without router
+- Class-based vanilla JavaScript
+- Pure functions for image processing
+- Separation of concerns (UI, Processing, Navigation)
 
-- Aplikasi membaca pixel dari koordinat (0,0) di pojok kiri atas
-- Format RGB: Red (0-255), Green (0-255), Blue (0-255)
-- Aplikasi juga membaca nilai Alpha (transparansi) tetapi tidak ditampilkan secara default
+## Browser Compatibility
 
-## 🤝 Kontribusi
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
 
-Feel free to fork dan customize sesuai kebutuhan Anda!
+## Performance Considerations
+
+- Matrix display limited to 100x100 pixels
+- Real-time operations optimized for responsive UI
+- Large images may experience slight delay during resize
+
+## Status Indicators
+
+### Color Coding
+
+- **Green**: Success, same resolution, operation complete
+- **Orange**: Warning, will be resized, aspect ratio differs
+- **Red**: Error, invalid input, operation failed
+
+## Documentation
+
+- `DIFFERENT_RESOLUTION_SUPPORT.md` - Details on auto-resize feature
+- `UPDATE_SUMMARY.md` - Implementation changelog
+- `QUICK_START_RESIZE.md` - Quick guide for different resolutions
+- `.github/copilot-instructions.md` - Development guidelines
+
+## Technologies
+
+- **Vite** - Build tool and dev server
+- **Vanilla JavaScript** - ES6+ without frameworks
+- **HTML5 Canvas API** - Pixel manipulation
+- **CSS3** - Modern styling with Flexbox and Grid
+
+## Use Cases
+
+- Image analysis and color extraction
+- Computer vision learning projects
+- Image processing education
+- Pixel art analysis
+- Color palette generation
+- Research and experimentation
+
+## Notes
+
+- Coordinate system starts at (0,0) in top-left corner
+- RGB format: Red (0-255), Green (0-255), Blue (0-255)
+- Alpha channel is read but not displayed in matrices
+- Aspect ratio is not preserved during resize
+
+## License
+
+MIT License - Feel free to use and modify
 
 ---
 
-Dibuat dengan ❤️ menggunakan Vite
+Built with Vite
