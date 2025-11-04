@@ -38,6 +38,9 @@
             <button class="tab-button" data-tab="histogram">
               📈 Histogram
             </button>
+            <button class="tab-button" data-tab="statistics">
+              📉 Statistics
+            </button>
             <button class="tab-button" data-tab="grayscale">
               🌑 Grayscale
             </button>
@@ -205,6 +208,480 @@
                     </div>
                     <div class="canvas-container">
                       <canvas id="afterEqHist"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Statistics Tab -->
+            <div id="statistics" class="tab-pane">
+              <h2>📉 Statistical Analysis</h2>
+              <div class="feature-controls">
+                <div class="control-group">
+                  <h3>Analisis Statistik Gambar Pertama</h3>
+                  <button class="action-button" id="calculateStatistics">
+                    📊 Hitung Statistik Gambar
+                  </button>
+                  <p class="info-text">
+                    💡 Klik untuk menghitung Pearson Correlation, Skewness,
+                    Kurtosis, Entropy, dan Chi-Square
+                  </p>
+                </div>
+              </div>
+
+              <!-- First Image Statistics Results -->
+              <div id="statisticalFirstImageResults" style="display: none">
+                <div class="statistics-container">
+                  <h3>📊 Hasil Analisis Gambar Pertama</h3>
+
+                  <!-- Pearson Correlation -->
+                  <div class="stats-section">
+                    <h4>🔗 Pearson Correlation</h4>
+                    <p class="stats-info">
+                      Mengukur hubungan linear antar channel warna. Nilai -1
+                      hingga 1.
+                    </p>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>R-G Correlation</p>
+                        <span id="statsImage1PearsonRG" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>R-B Correlation</p>
+                        <span id="statsImage1PearsonRB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>G-B Correlation</p>
+                        <span id="statsImage1PearsonGB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Skewness -->
+                  <div class="stats-section">
+                    <h4>⛃ Skewness (Kemencengan)</h4>
+                    <p class="stats-info">
+                      Mengukur asimetri distribusi. Positif = ekor kanan,
+                      Negatif = ekor kiri.
+                    </p>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Red Channel</p>
+                        <span id="statsImage1SkewnessR" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Green Channel</p>
+                        <span id="statsImage1SkewnessG" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Blue Channel</p>
+                        <span id="statsImage1SkewnessB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Kurtosis -->
+                  <div class="stats-section">
+                    <h4>📈 Kurtosis (Keruncingan)</h4>
+                    <p class="stats-info">
+                      Mengukur ekor distribusi. Positif = puncak tajam, Negatif
+                      = distribusi datar.
+                    </p>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Red Channel</p>
+                        <span id="statsImage1KurtosisR" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Green Channel</p>
+                        <span id="statsImage1KurtosisG" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Blue Channel</p>
+                        <span id="statsImage1KurtosisB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Entropy -->
+                  <div class="stats-section">
+                    <h4>🔀 Entropy (Entropi)</h4>
+                    <p class="stats-info">
+                      Mengukur keacakan. Tinggi = acak, Rendah = teratur. Range
+                      0-8 bits.
+                    </p>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Red Channel</p>
+                        <span id="statsImage1EntropyR" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Green Channel</p>
+                        <span id="statsImage1EntropyG" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Blue Channel</p>
+                        <span id="statsImage1EntropyB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chi-Square -->
+                  <div class="stats-section">
+                    <h4>📊 Chi-Square Test</h4>
+                    <p class="stats-info">
+                      Mengukur penyimpangan dari distribusi uniform. Semakin
+                      kecil = semakin uniform.
+                    </p>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Red Channel</p>
+                        <span id="statsImage1ChiSquareR" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Green Channel</p>
+                        <span id="statsImage1ChiSquareG" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Blue Channel</p>
+                        <span id="statsImage1ChiSquareB" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comparison Section -->
+              <div id="statisticalComparisonSection" style="display: none">
+                <div class="feature-controls">
+                  <h3>Perbandingan dengan Gambar Kedua</h3>
+                  <div class="control-group">
+                    <label for="statisticalSecondImageInput"
+                      >Upload Gambar Kedua:</label
+                    >
+                    <input
+                      type="file"
+                      id="statisticalSecondImageInput"
+                      accept="image/*"
+                      class="hidden-input"
+                    />
+                    <label
+                      for="statisticalSecondImageInput"
+                      class="upload-button-secondary"
+                    >
+                      📁 Pilih Gambar Kedua
+                    </label>
+                    <span id="statisticalImageStatus" class="status-text"
+                      >(belum di-upload)</span
+                    >
+                  </div>
+                  <div class="control-group">
+                    <button class="action-button" id="compareImages">
+                      🔀 Bandingkan dengan Gambar Pertama
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comparison Results -->
+              <div id="statisticalComparisonResults" style="display: none">
+                <div class="statistics-container">
+                  <h3>📊 Hasil Perbandingan Dua Gambar</h3>
+
+                  <!-- Image 2 Statistics -->
+                  <div
+                    style="
+                      background: #f8f9fa;
+                      padding: 20px;
+                      border-radius: 8px;
+                      margin-bottom: 20px;
+                    "
+                  >
+                    <h4>📊 Statistik Gambar Kedua</h4>
+
+                    <div class="stats-section">
+                      <h5>🔗 Pearson Correlation</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>R-G</p>
+                          <span id="statsImage2PearsonRG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>R-B</p>
+                          <span id="statsImage2PearsonRB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>G-B</p>
+                          <span id="statsImage2PearsonGB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>⛃ Skewness</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsImage2SkewnessR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsImage2SkewnessG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsImage2SkewnessB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>📈 Kurtosis</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsImage2KurtosisR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsImage2KurtosisG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsImage2KurtosisB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>🔀 Entropy</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsImage2EntropyR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsImage2EntropyG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsImage2EntropyB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>📊 Chi-Square</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsImage2ChiSquareR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsImage2ChiSquareG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsImage2ChiSquareB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Differences -->
+                  <div
+                    style="
+                      background: #e3f2fd;
+                      padding: 20px;
+                      border-radius: 8px;
+                    "
+                  >
+                    <h4>📊 Perbedaan Nilai (Matching)</h4>
+                    <p class="stats-info" style="color: #1565c0">
+                      Semakin kecil nilainya, semakin mirip kedua gambar
+                    </p>
+
+                    <div class="stats-section">
+                      <h5>🔗 Perbedaan Pearson Correlation</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>R-G Diff</p>
+                          <span id="statsDiffPearsonRG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>R-B Diff</p>
+                          <span id="statsDiffPearsonRB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>G-B Diff</p>
+                          <span id="statsDiffPearsonGB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>⛃ Perbedaan Skewness</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsDiffSkewnessR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsDiffSkewnessG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsDiffSkewnessB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>📈 Perbedaan Kurtosis</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsDiffKurtosisR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsDiffKurtosisG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsDiffKurtosisB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>🔀 Perbedaan Entropy</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsDiffEntropyR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsDiffEntropyG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsDiffEntropyB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stats-section">
+                      <h5>📊 Perbedaan Chi-Square</h5>
+                      <div class="stats-grid">
+                        <div class="stat-box">
+                          <p>Red</p>
+                          <span id="statsDiffChiSquareR" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Green</p>
+                          <span id="statsDiffChiSquareG" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                        <div class="stat-box">
+                          <p>Blue</p>
+                          <span id="statsDiffChiSquareB" class="stat-value"
+                            >-</span
+                          >
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

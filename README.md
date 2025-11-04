@@ -13,34 +13,44 @@ A web-based image processing application built with Vite for reading and analyzi
 
 ### Image Processing Operations
 
-1. **Grayscale Conversion**
+1. **📉 Statistical Analysis** ✨ NEW
+
+   - **Pearson Correlation**: Measure linear relationship between RGB channels (RG, RB, GB)
+   - **Skewness**: Measure asymmetry of pixel distribution
+   - **Kurtosis**: Measure peakedness of pixel distribution
+   - **Entropy**: Measure randomness/disorder in image (0-8 bits)
+   - **Chi-Square**: Measure deviation from uniform distribution
+   - **Image Comparison**: Calculate statistical differences between two images
+   - **Matching Metrics**: Determine similarity between images
+
+2. **Grayscale Conversion**
 
    - Automatic conversion using luminance formula: 0.299R + 0.587G + 0.114B
    - Real-time preview
 
-2. **Binary Threshold**
+3. **Binary Threshold**
 
    - Adjustable threshold slider (0-255)
    - Real-time conversion as you adjust the slider
 
-3. **Brightness Adjustment**
+4. **Brightness Adjustment**
 
    - Range: -255 to +255
    - Real-time brightness control with slider
 
-4. **Arithmetic Operations**
+5. **Arithmetic Operations**
 
    - Operations: Addition, Subtraction, Multiplication
    - Modes: Constant value or second image
    - Support for different image resolutions (auto-resize)
 
-5. **Boolean Operations**
+6. **Boolean Operations**
 
    - Operations: AND, OR, XOR
    - Dual image preview
    - Support for different image resolutions (auto-resize)
 
-6. **Geometric Transformations**
+7. **Geometric Transformations**
    - Rotation: 90°, 180°, 270°
    - Flip: Horizontal and Vertical
 
@@ -96,14 +106,22 @@ pixel-reader/
 ├── index.html                    # Main HTML with tab navigation
 ├── src/
 │   ├── main.js                   # Core application logic
-│   │   ├── TabManager           # Tab navigation handler
-│   │   ├── ImageProcessor       # Image processing algorithms
-│   │   └── PixelReader          # Main app class
-│   └── style.css                # Styling and layout
-├── .github/
-│   └── copilot-instructions.md  # AI coding guidelines
+│   ├── style.css                 # Styling and layout
+│   ├── components/
+│   │   └── tabManager.js         # Tab navigation handler
+│   ├── utils/
+│   │   ├── imageProcessor.js     # Image processing algorithms
+│   │   ├── histogramAnalyzer.js  # Histogram calculation
+│   │   └── statisticalAnalyzer.js# Statistical analysis ✨ NEW
+│   └── features/
+│       ├── pixelReader.js        # Main app class
+│       ├── histogramFeature.js   # Histogram feature
+│       └── statisticalFeature.js # Statistical feature ✨ NEW
 ├── package.json
-└── README.md
+├── README.md
+├── PANDUAN_STATISTIK.md          # User guide (Indonesian) ✨ NEW
+├── STATISTICAL_FEATURE_DOCS.md   # Technical documentation ✨ NEW
+└── CHANGES_SUMMARY.md            # Implementation details ✨ NEW
 ```
 
 ## Technical Details
@@ -149,6 +167,9 @@ pixel-reader/
 
 ## Documentation
 
+- `PANDUAN_STATISTIK.md` - Complete user guide in Indonesian for statistical analysis feature
+- `STATISTICAL_FEATURE_DOCS.md` - Technical documentation with formulas and use cases
+- `CHANGES_SUMMARY.md` - Detailed implementation summary
 - `DIFFERENT_RESOLUTION_SUPPORT.md` - Details on auto-resize feature
 - `UPDATE_SUMMARY.md` - Implementation changelog
 - `QUICK_START_RESIZE.md` - Quick guide for different resolutions
@@ -163,12 +184,17 @@ pixel-reader/
 
 ## Use Cases
 
-- Image analysis and color extraction
-- Computer vision learning projects
-- Image processing education
-- Pixel art analysis
-- Color palette generation
-- Research and experimentation
+- **Image analysis and color extraction**
+- **Computer vision learning projects**
+- **Image processing education**
+- **Pixel art analysis**
+- **Color palette generation**
+- **Research and experimentation**
+- **Image quality assessment** ✨ NEW (via Entropy and Chi-Square)
+- **Image similarity detection** ✨ NEW (via statistical comparison)
+- **Color characterization** ✨ NEW (via Pearson Correlation)
+- **Texture analysis** ✨ NEW (via Skewness, Kurtosis, Entropy)
+- **Anomaly detection** ✨ NEW (via statistical deviation)
 
 ## Notes
 

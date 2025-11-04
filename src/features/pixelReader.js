@@ -4,6 +4,7 @@
  */
 import { ImageProcessor } from "../utils/imageProcessor.js";
 import { HistogramFeature } from "./histogramFeature.js";
+import { StatisticalFeature } from "./statisticalFeature.js";
 
 export class PixelReader {
   constructor() {
@@ -29,6 +30,7 @@ export class PixelReader {
 
     // Features
     this.histogramFeature = null;
+    this.statisticalFeature = null;
 
     this.init();
   }
@@ -145,6 +147,9 @@ export class PixelReader {
 
         // Initialize histogram feature
         this.histogramFeature = new HistogramFeature(this.processor);
+
+        // Initialize statistical feature
+        this.statisticalFeature = new StatisticalFeature(this.processor);
 
         // Show tab section
         this.tabSection.classList.remove("hidden");
@@ -336,8 +341,11 @@ export class PixelReader {
     hoverRGB.textContent = `R:${pixel.r}, G:${pixel.g}, B:${pixel.b}`;
     hoverColor.style.backgroundColor = `rgb(${pixel.r}, ${pixel.g}, ${pixel.b})`;
 
-    this.hoverInfo.style.left = event.pageX + 20 + "px";
-    this.hoverInfo.style.top = event.pageY - 50 + "px";
+    // Use clientX/clientY untuk posisi relatif viewport, bukan document
+    // Ini memastikan hover info selalu sesuai dengan cursor saat scroll
+    this.hoverInfo.style.position = "fixed";
+    this.hoverInfo.style.left = event.clientX + 20 + "px";
+    this.hoverInfo.style.top = event.clientY - 50 + "px";
     this.hoverInfo.classList.remove("hidden");
   }
 
