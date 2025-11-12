@@ -5,6 +5,7 @@
 import { ImageProcessor } from "../utils/imageProcessor.js";
 import { HistogramFeature } from "./histogramFeature.js";
 import { StatisticalFeature } from "./statisticalFeature.js";
+import { GreenDetectionFeature } from "./greenDetectionFeature.js";
 
 export class PixelReader {
   constructor() {
@@ -31,6 +32,7 @@ export class PixelReader {
     // Features
     this.histogramFeature = null;
     this.statisticalFeature = null;
+    this.greenDetectionFeature = null;
 
     this.init();
   }
@@ -150,6 +152,9 @@ export class PixelReader {
 
         // Initialize statistical feature
         this.statisticalFeature = new StatisticalFeature(this.processor);
+
+        // Initialize green detection feature
+        this.greenDetectionFeature = new GreenDetectionFeature(this.processor);
 
         // Show tab section
         this.tabSection.classList.remove("hidden");

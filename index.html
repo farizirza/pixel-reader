@@ -53,6 +53,9 @@
             </button>
             <button class="tab-button" data-tab="boolean">🔣 Boolean</button>
             <button class="tab-button" data-tab="geometry">🔄 Geometry</button>
+            <button class="tab-button" data-tab="green-detection">
+              🌿 Green Detection
+            </button>
           </div>
 
           <!-- Tab Content -->
@@ -951,6 +954,193 @@
               <div class="matrix-display">
                 <h3>RGB Matrix (100x100 pixel pertama)</h3>
                 <div id="matrixList5" class="pixel-list"></div>
+              </div>
+            </div>
+
+            <!-- Green Detection Tab -->
+            <div id="green-detection" class="tab-pane">
+              <h2>🌿 Green Detection (Vegetation/Trees)</h2>
+              <p class="subtitle">
+                Deteksi pohon dan vegetasi hijau dari gambar satelit menggunakan
+                HSV color space
+              </p>
+
+              <div class="feature-controls">
+                <div class="control-group">
+                  <h3>Pengaturan Deteksi HSV</h3>
+                  <p class="info-text">
+                    💡 Sesuaikan parameter untuk mendapatkan deteksi optimal.
+                    Green hue normalnya berada di range 90-180 derajat
+                  </p>
+                </div>
+
+                <!-- Hue Range Slider -->
+                <div class="control-group">
+                  <div class="slider-container">
+                    <label>
+                      <span class="slider-label">🎨 Hue Min:</span>
+                      <input
+                        type="range"
+                        id="greenHueMin"
+                        min="0"
+                        max="360"
+                        value="90"
+                      />
+                      <span id="greenHueMinValue" class="slider-value">90</span
+                      >°
+                    </label>
+                  </div>
+                  <div class="slider-container">
+                    <label>
+                      <span class="slider-label">🎨 Hue Max:</span>
+                      <input
+                        type="range"
+                        id="greenHueMax"
+                        min="0"
+                        max="360"
+                        value="180"
+                      />
+                      <span id="greenHueMaxValue" class="slider-value">180</span
+                      >°
+                    </label>
+                  </div>
+                  <p id="hueRangeDesc" class="range-desc">Hue: 90° - 180°</p>
+                </div>
+
+                <!-- Saturation Slider -->
+                <div class="control-group">
+                  <div class="slider-container">
+                    <label>
+                      <span class="slider-label">🎪 Saturation Min:</span>
+                      <input
+                        type="range"
+                        id="greenSatMin"
+                        min="0"
+                        max="100"
+                        value="20"
+                      />
+                      <span id="greenSatMinValue" class="slider-value">20</span
+                      >%
+                    </label>
+                  </div>
+                  <p id="saturationDesc" class="range-desc">Saturation: >20%</p>
+                </div>
+
+                <!-- Value/Brightness Slider -->
+                <div class="control-group">
+                  <div class="slider-container">
+                    <label>
+                      <span class="slider-label">💡 Value Min:</span>
+                      <input
+                        type="range"
+                        id="greenValueMin"
+                        min="0"
+                        max="100"
+                        value="10"
+                      />
+                      <span id="greenValueMinValue" class="slider-value"
+                        >10</span
+                      >%
+                    </label>
+                  </div>
+                  <p id="valueDesc" class="range-desc">Value: >10%</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="control-group">
+                  <button class="action-button" id="detectGreenButton">
+                    🌿 Deteksi Green (Pohon)
+                  </button>
+                  <button class="action-button secondary" id="resetGreenButton">
+                    🔄 Reset
+                  </button>
+                </div>
+              </div>
+
+              <!-- Results Section -->
+              <div class="green-detection-results">
+                <!-- Original vs Binary Detection -->
+                <div class="canvas-comparison">
+                  <div class="comparison-item">
+                    <h3>🔍 Binary Mask (Putih = Pohon)</h3>
+                    <div class="canvas-container">
+                      <canvas id="greenBinaryCanvas"></canvas>
+                    </div>
+                  </div>
+                  <div class="comparison-item">
+                    <h3>🎨 Colored Detection</h3>
+                    <div class="canvas-container">
+                      <canvas id="greenColorCanvas"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="statistics-container">
+                  <h3>📊 Statistik Deteksi</h3>
+
+                  <div class="stats-section">
+                    <h4>Jumlah Pixel</h4>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Green Pixels</p>
+                        <span id="greenPixelsCount" class="stat-value">-</span>
+                      </div>
+                      <div class="stat-box">
+                        <p>Total Pixels</p>
+                        <span id="totalPixelsCount" class="stat-value">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="stats-section">
+                    <h4>Persentase</h4>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Green %</p>
+                        <span id="greenPercentage" class="stat-value">-</span>
+                      </div>
+                      <div class="stat-box">
+                        <p>Non-Green %</p>
+                        <span id="nonGreenPercentage" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="stats-section">
+                    <h4>Rata-rata HSV dari Green Pixels</h4>
+                    <div class="stats-grid">
+                      <div class="stat-box">
+                        <p>Avg Hue</p>
+                        <span id="avgHueGreen" class="stat-value">-</span>
+                      </div>
+                      <div class="stat-box">
+                        <p>Avg Saturation</p>
+                        <span id="avgSaturationGreen" class="stat-value"
+                          >-</span
+                        >
+                      </div>
+                      <div class="stat-box">
+                        <p>Avg Value</p>
+                        <span id="avgValueGreen" class="stat-value">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Distribution Chart -->
+                  <div class="chart-section">
+                    <h4>📈 Distribusi Green vs Non-Green</h4>
+                    <div class="canvas-container">
+                      <canvas
+                        id="greenDistributionChart"
+                        width="400"
+                        height="200"
+                      ></canvas>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
