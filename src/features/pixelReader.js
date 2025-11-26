@@ -6,6 +6,8 @@ import { ImageProcessor } from "../utils/imageProcessor.js";
 import { HistogramFeature } from "./histogramFeature.js";
 import { StatisticalFeature } from "./statisticalFeature.js";
 import { GreenDetectionFeature } from "./greenDetectionFeature.js";
+import { EdgeDetectionFeature } from "./edgeDetectionFeature.js";
+import { SteganographyFeature } from "./steganographyFeature.js";
 
 export class PixelReader {
   constructor() {
@@ -33,6 +35,8 @@ export class PixelReader {
     this.histogramFeature = null;
     this.statisticalFeature = null;
     this.greenDetectionFeature = null;
+    this.edgeDetectionFeature = null;
+    this.steganographyFeature = null;
 
     this.init();
   }
@@ -155,6 +159,12 @@ export class PixelReader {
 
         // Initialize green detection feature
         this.greenDetectionFeature = new GreenDetectionFeature(this.processor);
+
+        // Initialize edge detection feature
+        this.edgeDetectionFeature = new EdgeDetectionFeature(this.processor);
+
+        // Initialize steganography feature
+        this.steganographyFeature = new SteganographyFeature(this.processor);
 
         // Show tab section
         this.tabSection.classList.remove("hidden");

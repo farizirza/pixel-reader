@@ -23,34 +23,50 @@ A web-based image processing application built with Vite for reading and analyzi
    - **Image Comparison**: Calculate statistical differences between two images
    - **Matching Metrics**: Determine similarity between images
 
-2. **Grayscale Conversion**
+2. **🌿 Green Detection** ✨ NEW
+
+   - HSV color space-based vegetation detection
+   - Adjustable Hue, Saturation, Value parameters
+   - Binary mask and colored visualization
+   - Statistical analysis (pixel counts, percentages)
+   - Donut chart distribution visualization
+
+3. **🔍 Edge Detection** ✨ NEW
+
+   - **Kernel Options**: Sobel, Prewitt, Roberts, Laplacian
+   - **Kernel Visualization**: Display kernel matrices
+   - **Convolution Matrices**: Show detailed convolution process
+   - **Threshold Control**: Adjustable edge detection sensitivity
+   - **Complete Process Display**: Input matrix, kernel, and calculation results
+
+4. **Grayscale Conversion**
 
    - Automatic conversion using luminance formula: 0.299R + 0.587G + 0.114B
    - Real-time preview
 
-3. **Binary Threshold**
+5. **Binary Threshold**
 
    - Adjustable threshold slider (0-255)
    - Real-time conversion as you adjust the slider
 
-4. **Brightness Adjustment**
+6. **Brightness Adjustment**
 
    - Range: -255 to +255
    - Real-time brightness control with slider
 
-5. **Arithmetic Operations**
+7. **Arithmetic Operations**
 
    - Operations: Addition, Subtraction, Multiplication
    - Modes: Constant value or second image
    - Support for different image resolutions (auto-resize)
 
-6. **Boolean Operations**
+8. **Boolean Operations**
 
    - Operations: AND, OR, XOR
    - Dual image preview
    - Support for different image resolutions (auto-resize)
 
-7. **Geometric Transformations**
+9. **Geometric Transformations**
    - Rotation: 90°, 180°, 270°
    - Flip: Horizontal and Vertical
 
@@ -112,16 +128,20 @@ pixel-reader/
 │   ├── utils/
 │   │   ├── imageProcessor.js     # Image processing algorithms
 │   │   ├── histogramAnalyzer.js  # Histogram calculation
-│   │   └── statisticalAnalyzer.js# Statistical analysis ✨ NEW
+│   │   ├── statisticalAnalyzer.js# Statistical analysis ✨
+│   │   ├── hsvAnalyzer.js        # HSV color space & green detection ✨
+│   │   └── edgeDetectionAnalyzer.js # Edge detection algorithms ✨ NEW
 │   └── features/
 │       ├── pixelReader.js        # Main app class
 │       ├── histogramFeature.js   # Histogram feature
-│       └── statisticalFeature.js # Statistical feature ✨ NEW
+│       ├── statisticalFeature.js # Statistical analysis feature ✨
+│       ├── greenDetectionFeature.js # Green detection feature ✨
+│       └── edgeDetectionFeature.js # Edge detection feature ✨ NEW
 ├── package.json
 ├── README.md
-├── PANDUAN_STATISTIK.md          # User guide (Indonesian) ✨ NEW
-├── STATISTICAL_FEATURE_DOCS.md   # Technical documentation ✨ NEW
-└── CHANGES_SUMMARY.md            # Implementation details ✨ NEW
+├── PANDUAN_STATISTIK.md          # User guide (Indonesian) ✨
+├── STATISTICAL_FEATURE_DOCS.md   # Technical documentation ✨
+└── CHANGES_SUMMARY.md            # Implementation details ✨
 ```
 
 ## Technical Details
@@ -190,11 +210,16 @@ pixel-reader/
 - **Pixel art analysis**
 - **Color palette generation**
 - **Research and experimentation**
-- **Image quality assessment** ✨ NEW (via Entropy and Chi-Square)
-- **Image similarity detection** ✨ NEW (via statistical comparison)
-- **Color characterization** ✨ NEW (via Pearson Correlation)
-- **Texture analysis** ✨ NEW (via Skewness, Kurtosis, Entropy)
-- **Anomaly detection** ✨ NEW (via statistical deviation)
+- **Image quality assessment** ✨ (via Entropy and Chi-Square)
+- **Image similarity detection** ✨ (via statistical comparison)
+- **Color characterization** ✨ (via Pearson Correlation)
+- **Texture analysis** ✨ (via Skewness, Kurtosis, Entropy)
+- **Anomaly detection** ✨ (via statistical deviation)
+- **Vegetation monitoring** ✨ (via Green Detection with HSV)
+- **Edge detection and contour analysis** ✨ NEW (via Sobel, Prewitt, Roberts, Laplacian kernels)
+- **Feature extraction for object detection** ✨ NEW
+- **Boundary detection in images** ✨ NEW
+- **Image preprocessing for computer vision pipelines** ✨ NEW
 
 ## Notes
 

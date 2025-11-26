@@ -56,6 +56,12 @@
             <button class="tab-button" data-tab="green-detection">
               🌿 Green Detection
             </button>
+            <button class="tab-button" data-tab="edge-detection">
+              🔍 Edge Detection
+            </button>
+            <button class="tab-button" data-tab="steganography">
+              🔐 Steganography
+            </button>
           </div>
 
           <!-- Tab Content -->
@@ -1141,6 +1147,217 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- Edge Detection Tab -->
+            <div id="edge-detection" class="tab-pane">
+              <h2>🔍 Edge Detection (Deteksi Tepi)</h2>
+              <p class="subtitle">
+                Deteksi tepi/edge dalam gambar menggunakan kernel berbeda
+                (Sobel, Prewitt, Roberts, Laplacian)
+              </p>
+
+              <div class="feature-controls">
+                <div class="control-group">
+                  <h3>Pengaturan Deteksi Tepi</h3>
+                  <p class="info-text">
+                    💡 Pilih kernel untuk mendeteksi tepi dengan cara berbeda.
+                    Sobel adalah pilihan default yang bagus.
+                  </p>
+                </div>
+
+                <!-- Kernel Selection -->
+                <div class="control-group">
+                  <label for="edgeKernelSelect">Pilih Kernel:</label>
+                  <select id="edgeKernelSelect">
+                    <option value="sobel">Sobel (Rekomendasi)</option>
+                    <option value="prewitt">Prewitt</option>
+                    <option value="roberts">Roberts</option>
+                    <option value="laplacian">Laplacian</option>
+                  </select>
+                </div>
+
+                <!-- Kernel Display -->
+                <div class="control-group">
+                  <div id="kernelDisplay"></div>
+                </div>
+
+                <!-- Threshold Slider -->
+                <div class="control-group">
+                  <div class="slider-container">
+                    <label>
+                      <span class="slider-label">🎯 Threshold:</span>
+                      <input
+                        type="range"
+                        id="edgeThreshold"
+                        min="0"
+                        max="255"
+                        value="50"
+                      />
+                      <span id="edgeThresholdValue" class="slider-value"
+                        >50</span
+                      >
+                    </label>
+                  </div>
+                  <p class="range-desc">
+                    Semakin tinggi threshold, semakin sedikit tepi yang
+                    terdeteksi
+                  </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="control-group">
+                  <button class="action-button" id="detectEdgesButton">
+                    🔍 Deteksi Tepi
+                  </button>
+                  <button class="action-button secondary" id="resetEdgesButton">
+                    🔄 Reset
+                  </button>
+                </div>
+              </div>
+
+              <!-- Results Section -->
+              <div class="edge-detection-results">
+                <!-- Edge Detection Result -->
+                <div class="result-section">
+                  <h3>🖼️ Hasil Deteksi Tepi</h3>
+                  <div class="canvas-container">
+                    <canvas id="edgeDetectionCanvas"></canvas>
+                  </div>
+                </div>
+
+                <!-- Kernel Information -->
+                <div class="kernel-info-section">
+                  <h3>📐 Matriks Kernel</h3>
+                  <div id="edgeKernelInfo" class="kernel-info-display"></div>
+                </div>
+
+                <!-- Convolution Matrices -->
+                <div class="convolution-section">
+                  <h3>📊 Matriks Hasil Konvolusi</h3>
+                  <p class="info-text">
+                    Menampilkan contoh proses konvolusi dari beberapa posisi
+                    dalam gambar
+                  </p>
+                  <div
+                    id="convolutionMatrices"
+                    class="convolution-display"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steganography Tab -->
+            <div id="steganography" class="tab-pane">
+              <h2>🔐 Steganografi Teks (LSB)</h2>
+              <p class="info-text">
+                Sembunyikan pesan teks dalam gambar menggunakan metode Least
+                Significant Bit (LSB). Perubahan pada gambar tidak terlihat oleh
+                mata manusia.
+              </p>
+
+              <!-- Encode Section -->
+              <div class="stegano-section">
+                <h3>📝 Encode - Sembunyikan Teks</h3>
+                <div class="stegano-input-group">
+                  <label for="steganoTextInput"
+                    >Masukkan teks yang ingin disembunyikan:</label
+                  >
+                  <textarea
+                    id="steganoTextInput"
+                    class="stegano-textarea"
+                    placeholder="Ketik pesan rahasia Anda di sini..."
+                    rows="4"
+                  ></textarea>
+                  <div class="stegano-input-info">
+                    <span id="steganoCharCount">0 karakter</span>
+                    <span id="steganoCapacity">Kapasitas: -</span>
+                  </div>
+                </div>
+                <div class="button-group">
+                  <button
+                    id="encodeSteganoButton"
+                    class="action-button primary"
+                  >
+                    🔒 Sembunyikan Pesan
+                  </button>
+                  <button
+                    id="downloadSteganoButton"
+                    class="action-button success"
+                    style="display: none"
+                  >
+                    💾 Download Gambar
+                  </button>
+                  <button
+                    id="resetSteganoButton"
+                    class="action-button secondary"
+                  >
+                    🔄 Reset
+                  </button>
+                </div>
+              </div>
+
+              <!-- Encode Results -->
+              <div
+                id="steganoResults"
+                class="stegano-results"
+                style="display: none"
+              >
+                <h3>📊 Hasil Encoding</h3>
+                <div id="steganoEncodeInfo" class="stegano-encode-info"></div>
+
+                <div class="stegano-images-grid">
+                  <div class="stegano-image-box">
+                    <h4>🖼️ Gambar Asli</h4>
+                    <div class="canvas-container">
+                      <canvas id="steganoOriginalCanvas"></canvas>
+                    </div>
+                  </div>
+                  <div class="stegano-image-box">
+                    <h4>🔐 Gambar dengan Pesan</h4>
+                    <div class="canvas-container">
+                      <canvas id="steganoEncodedCanvas"></canvas>
+                    </div>
+                  </div>
+                  <div class="stegano-image-box">
+                    <h4>🔍 Perbedaan (Amplified)</h4>
+                    <p class="small-info">
+                      Perbedaan diperbesar 255x agar terlihat
+                    </p>
+                    <div class="canvas-container">
+                      <canvas id="steganoDiffCanvas"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decode Section -->
+              <div class="stegano-section">
+                <h3>🔓 Decode - Ekstrak Teks</h3>
+                <p class="info-text">
+                  Upload gambar yang berisi pesan tersembunyi untuk mengekstrak
+                  teksnya.
+                </p>
+                <div class="stegano-upload-group">
+                  <input type="file" id="steganoImageInput" accept="image/*" />
+                  <label for="steganoImageInput" class="upload-button small">
+                    📤 Upload Gambar Steganografi
+                  </label>
+                  <span id="steganoImageStatus" class="status-text"></span>
+                </div>
+                <div class="stegano-decode-preview">
+                  <div class="canvas-container">
+                    <canvas id="steganoDecodeCanvas"></canvas>
+                  </div>
+                </div>
+                <button id="decodeSteganoButton" class="action-button primary">
+                  🔓 Ekstrak Pesan
+                </button>
+                <div
+                  id="steganoDecodeResult"
+                  class="stegano-decode-result"
+                ></div>
               </div>
             </div>
           </div>
